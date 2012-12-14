@@ -1,0 +1,28 @@
+{% extends 'admin/edit.html' %}
+{% block breadcrumbs %}
+    <div class="breadcrumb_divider"></div>
+    <a class="current">About</a>
+{% endblock %}
+
+{% block edit_form %}
+    <article class="module width_full">
+        <header><h3>About block</h3></header>
+        <div class="module_content">
+            <fieldset>
+                <label>Edit</label>
+                <textarea name="about" rows="12" form="save">{{ about | safe }}</textarea>
+            </fieldset>
+            <div class="clear"></div>
+        </div>
+        <footer>
+            <div class="submit_link">
+                <form id="save" action="" method="post">
+                    <input type="submit" value="Save" class="alt_btn">
+                    <input type="reset" value="Reset">
+                </form>
+            </div>
+        </footer>
+    </article>
+    <!-- end of post new article -->
+
+{% endblock %}

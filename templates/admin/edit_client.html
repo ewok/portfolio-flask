@@ -1,0 +1,44 @@
+{% extends 'admin/edit.html' %}
+{% block breadcrumbs %}
+    <div class="breadcrumb_divider"></div>
+    <a href="{{ url_for('clients_list') }}">Clients</a>
+    {% block breadcrumbs_1 %}
+        <div class="breadcrumb_divider"></div>
+        <a class="current">Edit client</a>
+    {% endblock %}
+{% endblock %}
+
+{% block edit_form %}
+    <article class="module width_full">
+        <form action="" method="post" id="project">
+            <header><h3>Client # {{ client.id }}</h3></header>
+            <div class="module_content">
+                {#                <input name="id" type="hidden" value="{{ project.id }}">#}
+                <fieldset style="width:48%">
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text" value="{{ client.title }}" style="width:92%;">
+                </fieldset>
+                <fieldset>
+                    <label for="logo">logo</label>
+                    <input id="logo" name="logo" type="text" value="{{ client.logo }}">
+                </fieldset>
+                <fieldset>
+                    <label for="link">link</label>
+                    <input id="link" name="link" type="text" value="{{ client.link }}">
+                </fieldset>
+                <fieldset>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="12">{{ client.description }}</textarea>
+                </fieldset>
+                <div class="clear"></div>
+            </div>
+            <footer>
+                <div class="submit_link">
+                    <input type="submit" value="Save" class="alt_btn">
+                    <input type="reset" value="Reset">
+                </div>
+            </footer>
+        </form>
+    </article>
+    <!-- end of post new article -->
+{% endblock %}

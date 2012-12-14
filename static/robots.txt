@@ -1,0 +1,36 @@
+User-agent: *
+Disallow: /author/
+Disallow: /author/*
+Disallow: /date/
+Disallow: /date/*
+Disallow: /category/
+Disallow: /category/*
+Disallow: /tag/
+Disallow: /tag/*
+Disallow: /admin/
+Disallow: /admin_tools/
+Disallow: /comments/
+Disallow: /comments/*
+Disallow: /?*
+Allow: /
+
+
+User-agent: Yandex
+Crawl-delay: 4
+Disallow: /author/
+Disallow: /author/*
+Disallow: /date/
+Disallow: /date/*
+Disallow: /category/
+Disallow: /category/*
+Disallow: /tag/
+Disallow: /tag/*
+Disallow: /admin/
+Disallow: /admin_tools/
+Disallow: /comments/
+Disallow: /comments/*
+Disallow: /?*
+Allow: /
+Host: ewok.ru
+
+Sitemap: http://ewok.ru/sitemap.xml

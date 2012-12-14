@@ -1,0 +1,62 @@
+{% extends 'admin/edit.html' %}
+{% block breadcrumbs %}
+    <div class="breadcrumb_divider"></div>
+    <a href="{{ url_for('projects_list') }}">Portfolio</a>
+    {% block breadcrumbs_1 %}
+        <div class="breadcrumb_divider"></div>
+        <a class="current">Edit work</a>
+    {% endblock %}
+{% endblock %}
+
+{% block edit_form %}
+    <article class="module width_full">
+        <form action="" method="post" id="project">
+            <header><h3>Project # {{ project.id }}</h3></header>
+            <div class="module_content">
+                {#                <input name="id" type="hidden" value="{{ project.id }}">#}
+                <fieldset style="width:48%">
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text" value="{{ project.title }}" style="width:92%;">
+                </fieldset>
+                <fieldset style="margin-right:3%;width:45%">
+                    <label for="category">Category</label>
+                    <select name="category" id="category">
+                        {% for category in categories %}
+                            <option {% if category.id == project.category_id %}selected{% endif %}
+                                    value="{{ category.id }}">{{ category.title }}</option>
+                        {% endfor %}
+                    </select>
+                </fieldset>
+                <fieldset style="margin-right:3%;width: 45%">
+                    <label for="client">Client</label>
+                    <select name="client" id="client">
+                        {% for client in clients %}
+                            <option {% if client.id == project.client_id %}selected{% endif %}
+                                    value="{{ client.id }}">{{ client.title }}</option>
+                        {% endfor %}
+                    </select>
+                </fieldset>
+                <fieldset>
+                    <label for="logo">logo</label>
+                    <input id="logo" name="logo" type="text" value="{{ project.logo }}">
+                </fieldset>
+                <fieldset>
+                    <label for="link">link</label>
+                    <input id="link" name="link" type="text" value="{{ project.link }}">
+                </fieldset>
+                <fieldset>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="12">{{ project.description }}</textarea>
+                </fieldset>
+                <div class="clear"></div>
+            </div>
+            <footer>
+                <div class="submit_link">
+                    <input type="submit" value="Save" class="alt_btn">
+                    <input type="reset" value="Reset">
+                </div>
+            </footer>
+        </form>
+    </article>
+    <!-- end of post new article -->
+{% endblock %}

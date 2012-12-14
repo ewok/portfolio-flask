@@ -1,0 +1,42 @@
+{% extends 'admin/edit_client.html' %}
+{% block breadcrumbs_1 %}
+    <div class="breadcrumb_divider"></div>
+    <a class="current">New client</a>
+{% endblock %}
+
+{% block content %}
+    {% if errors %}
+        <h4 class="alert_error">{{ errors }}</h4>
+    {% endif %}
+    <article class="module width_full">
+        <form action="" method="post" id="client">
+            <header><h3>New Client</h3></header>
+            <div class="module_content">
+                <fieldset style="width:48%">
+                    <label for="title">Title</label>
+                    <input id="title" name="title" type="text" value="" style="width:92%;">
+                </fieldset>
+                <fieldset>
+                    <label for="logo">logo</label>
+                    <input id="logo" name="logo" type="text" value="">
+                </fieldset>
+                <fieldset>
+                    <label for="link">link</label>
+                    <input id="link" name="link" type="text" value="">
+                </fieldset>
+                <fieldset>
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="12"></textarea>
+                </fieldset>
+                <div class="clear"></div>
+            </div>
+            <footer>
+                <div class="submit_link">
+                    <input type="submit" value="Save" class="alt_btn">
+                    <input type="reset" value="Reset">
+                </div>
+            </footer>
+        </form>
+    </article>
+    <!-- end of post new article -->
+{% endblock %}

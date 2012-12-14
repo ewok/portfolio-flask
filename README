@@ -1,1 +1,13 @@
-This file was created by PyCharm (2.7 EAP) PY-122.790 for binding GitHub repository
+portfolio-flask
+===============
+
+Мой тренировочный проект.
+Для запуска нужны: flask, sqlalchemy, sqlite или mysql
+
+Порядок запуска:
+1. Заполнить файл настроек config.py
+2. Для инициализации базы данных запустить "./portfolio.py init-db"
+3. Запуск "./portfolio.py"
+
+Запустится сервер.
+Доступ в админку по "/admin"

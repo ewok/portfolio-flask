@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}styles/style.css" media="screen"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}styles/media-queries.css"/>
+    <link href="{{ STATIC_URL }}styles/prettyPhoto.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="{{ STATIC_URL }}styles/tipsy.css" rel="stylesheet" type="text/css" media="screen"/>
+
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery-1.7.1.min.js"></script>
+    <script src="{{ STATIC_URL }}scripts/jquery.prettyPhoto.js" type="text/javascript"></script>
+    <script type="text/javascript">    $(function () {
+        $(".gallery:not(.slideshow) a[rel^='prettyPhoto']").prettyPhoto();
+        $(".gallery.slideshow a[rel^='prettyPhoto']").prettyPhoto({slideshow: 5000, autoplay_slideshow: true});
+    });</script>
+    <script src="{{ STATIC_URL }}scripts/jquery.tipsy.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}scripts/jquery.knob.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery.isotope.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery.smooth-scroll.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/waypoints.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}scripts/setup.js"></script>
+    {% if DEBUG == False and google_analytics != False %}
+        {{ google_analytics | safe }}
+    {% endif %}
+</head>
+
+<body>
+<div id="inline-projects" style="display: none;">
+    {% for project in projects %}
+        <div id="project-{{ project.id }}" class="hide" style="max-height: 400px;">
+            <img src="{{ IMAGES_URL }}{{ project.logo }}" alt="">
+
+            <h2 style="color: #000000;">{{ project.title }}</h2>
+            <span style="color: #000000;">Client: {{ project.client.title }}</span><br>
+            <span style="color: #000000;">Link: <a href="{{ project.link }}" style="color: blue;"
+                                                   target="_blank">{{ project.link }}</a></span><br>
+
+            <span style="color: #000000;">Description: {{ project.description }}</span>
+        </div>
+    {% endfor %}
+</div>
+<div id="wrap">
+    <!-- wrapper -->
+    <div id="sidebar">
+        <!-- the  sidebar -->
+        <!-- logo -->
+        <a href="#" id="logo"> <img src="{{ IMAGES_URL }}logo.png" alt=""/></a>
+        <!-- navigation menu -->
+        <ul id="navigation">
+            <li><a href="#about" class="active">About</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#skills">My Skills</a></li>
+            <li><a href="#myclients">My Clients</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+
+    <div id="container">
+        <div class="page" id="about">
+            <!-- page about -->
+            <h3 class="page_title"> About Me</h3>
+
+            <div class="page_content">
+                <p> {{ about | safe }}</p>
+
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="page" id="portfolio">
+            <!-- page portfolio -->
+            <h3 class="page_title"> Portfolio</h3>
+
+            <div class="page_content">
+                {#        <p> My portfolio.</p>#}
+                <ul id="works_filter">
+                    <li><a href="#" data-filter="*" class="selected">Show All</a></li>
+                    {% for category in categories %}
+                        <li><a href="#" data-filter=".{{ category.id }}">{{ category.title }}</a></li>
+                    {% endfor %}
+                </ul>
+                <div class="clear"></div>
+
+                <div id="works">
+                    <!-- works -->
+                    {% for project in projects %}
+                        <li>
+                            <a href="#project-{{ project.id }}" rel="prettyPhoto">
+                                <img class="work {{ project.category_id }}"
+                                     src="{{ IMAGES_URL }}{{ project.thumb }}"
+                                     alt="" width="50"/>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </div>
+
+                <div class="clear"></div>
+                {#                </div>#}
+            </div>
+        </div>
+
+        <div class="page" id="skills">
+            <!-- page skills -->
+            <h3 class="page_title"> My Skills</h3>
+
+            <div class="page_content">
+                {% for skill in skills %}
+                    <div class="one_fourth{% if loop.first %} first{% endif %}{% if loop.last %} last{% endif %}">
+                        <div class="column_content">
+                            <h4 class="blue"> {{ skill.title }}</h4>
+                            <input class="knob" data-readonly="true" data-width="120" data-min="0"
+                                   data-angleoffset="0"
+                                   data-displayprevious="true" data-fgcolor="#cfdee7" data-bgcolor="#0d4667"
+                                   value="{{ skill.percent }}">
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="page" id="myclients">
+            <!-- page clients -->
+            <h3 class="page_title"> My Clients</h3>
+
+            <div class="page_content">
+                <p></p>
+
+                <div class="space"></div>
+                <div class="clear"></div>
+                <ul id="clients" class="grid">
+                    {% for client in clients %}
+                        <li class="client"><a href="{{ client.link }}"> <img
+                                src="{{ IMAGES_URL }}{{ client.logo }}" alt="{{ client.title }}"></a></li>
+                    {% endfor %}
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="page" id="contact">
+            <!-- page contact -->
+            <h3 class="page_title"> Let's Get in Touch</h3>
+
+            <div class="page_content">
+                <fieldset id="contact_form">
+                    <div id="msgs"></div>
+                    <form id="cform" name="cform" method="post" action="">
+                        <input type="text" id="name" name="name" value="Full Name*"
+                               onfocus="if(this.value == 'Full Name*') this.value = ''"
+                               onblur="if(this.value == '') this.value = 'Full Name*'"/>
+                        <input type="text" id="email" name="email" value="Email Address*"
+                               onfocus="if(this.value == 'Email Address*') this.value = ''"
+                               onblur="if(this.value == '') this.value = 'Email Address*'"/>
+                        <input type="text" id="subject" name="subject" value="Subject*"
+                               onfocus="if(this.value == 'Subject*') this.value = ''"
+                               onblur="if(this.value == '') this.value = 'Subject*'"/>
+                        <textarea id="msg" name="message"
+                                  onfocus="if(this.value == 'Your Message*') this.value = ''"
+                                  onblur="if(this.value == '') this.value = 'Your Message*'">Your Message*</textarea>
+                        <button id="submit" class="button"> Send Message</button>
+                    </form>
+                </fieldset>
+
+                <div class="clear"></div>
+                <ul class="social_icons">
+                    <li><a href="http://www.facebook.com/ewokru" id="fb" original-title="Join My Fan Club"> <img
+                            src="{{ STATIC_URL }}resources/facebook.png" alt="Facebook"/></a></li>
+                    <li><a href="http://twitter.com/ewokru" id="tw" original-title="Follow Me on Twitter"> <img
+                            src="{{ STATIC_URL }}resources/twitter.png" alt="Twitter"/></a></li>
+                    {#          <li><a href="#" id="ld" original-title="Find me on LinkedIn"> <img src="{{ STATIC_URL }}images/linkedin.png" alt="LinkedIn" /></a></li>#}
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p> Designed With Love by <a href="http://esarfraz.com">Sarfraz Shoukat</a></p>
+        </div>
+
+    </div>
+</div>
+<a class="gotop" href="#top">Top</a>
+</body>
+</html>

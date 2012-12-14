@@ -1,0 +1,47 @@
+{% extends 'admin/edit.html' %}
+{% block breadcrumbs %}
+    <div class="breadcrumb_divider"></div>
+    <a class="current">Skills</a>
+{% endblock %}
+
+
+{% block edit_form %}
+    <article class="module width_3_quarter">
+        <header><h3 class="tabs_involved">Content Manager</h3>
+            <ul class="tabs">
+                <li><a href="#tab1">Skills</a></li>
+            </ul>
+        </header>
+        <div class="tab_container">
+            <div id="tab1" class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                    <thead>
+                    <tr>
+                        {#                    <th></th>#}
+                        <th>Name</th>
+                        <th>Percent</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for skill in skills %}
+                        <tr>
+                            {#                    <td><input type="checkbox"></td>#}
+                            <td>{{ skill.title }}</td>
+                            <td><input name="skill_{{ skill.id }}" form="save" type="range" value="{{ skill.percent }}"></td>
+
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <!-- end of #tab1 -->
+        </div>
+        <footer>
+            <div class="submit_link">
+                <form id="save" action="" method="post">
+                    <input type="submit" value="Save" class="alt_btn">
+                    <input type="reset" value="Reset">
+                </form>
+            </div>
+        </footer>
+    </article>
+{% endblock %}

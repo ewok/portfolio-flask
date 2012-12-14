@@ -1,0 +1,59 @@
+{% extends 'admin/edit.html' %}
+{% block breadcrumbs %}
+    <div class="breadcrumb_divider"></div>
+    <a class="current">Categories</a>
+{% endblock %}
+
+
+{% block edit_form %}
+    <article class="module width_3_quarter">
+        <header><h3 class="tabs_involved">Content Manager</h3>
+            <ul class="tabs">
+                <li><a href="#tab1">Categories</a></li>
+            </ul>
+        </header>
+
+        <div class="tab_container">
+            <div id="tab1" class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for category in categories %}
+                        <tr>
+                        <td>{{ category.id }}</td>
+                            <td><input form="save" name="title-{{ category.id }}" type="text" value="{{ category.title }}"></td>
+                            <td><input form="save" name="description-{{ category.id }}" type="text"
+                                       value="{{ category.description }}"></td>
+                            <td>
+                                <a href="{{ url_for('categories_list', delete=category.id) }}">
+                                    <img src="{{ STATIC_URL }}admin/images/icn_trash.png" title="Trash">
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <td>*</td>
+                    <td><input form="save" name="new-title" type="text" value=""></td>
+                    <td><input form="save" name="new-description" type="text" value=""></td>
+                    <td></td>
+
+                </table>
+            </div>
+            <!-- end of #tab1 -->
+        </div>
+        <footer>
+            <form action="" method="post" id="save">
+                <div class="submit_link">
+                    <input type="submit" value="Save" class="alt_btn">
+                    <input type="reset" value="Reset">
+                </div>
+            </form>
+        </footer>
+    </article>
+{% endblock %}
