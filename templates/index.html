@@ -133,11 +133,11 @@
                 <div class="clear"></div>
                 <ul id="clients" class="grid">
                     {% for client in clients %}
-                        <li class="client"><a href="{{ client.link }}">
+                        <li class="client">
                             {% if client.logo %}
-                                <img src="{{ IMAGES_URL }}{{ client.logo }}" alt="{{ client.title }}"></a>
+                                <a href="{{ client.link }}"><img src="{{ IMAGES_URL }}{{ client.logo }}" alt="{{ client.title }}"></a>
                             {% else %}
-                                {{ client.title }}
+                                <a href="{{ client.link }}">{{ client.title }}</a>
                             {% endif %}
                         </li>
                     {% endfor %}

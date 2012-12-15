@@ -26,3 +26,19 @@ def generate_and_save_thumbnail(image_file, h, w):
         print sys.exc_info()
         return None
 
+# Make mail message
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import quopri
+def QuoHead(String):
+    s = quopri.encodestring(String.encode('UTF-8'), 1, 0)
+    return "=?utf-8?Q?" + s.decode('UTF-8') + "?="
+
+def get_mail_body(name, email_from, email_to, subject, message):
+    msg = MIMEMultipart()
+    msg["Subject"] = QuoHead(subject).replace('=\n', '')
+    msg["From"] = (QuoHead(name) + "  <" + email_from + ">").replace('=\n', '')
+    msg["To"] = (" <" + email_to + ">").replace('=\n', '')
+    text = MIMEText(message.encode('utf-8'), 'plain', 'UTF-8')
+    msg.attach(text)
+    return msg
