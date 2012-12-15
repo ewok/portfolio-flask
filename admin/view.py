@@ -57,6 +57,7 @@ def edit_project(project_id):
                 saved = True
 
             except exceptions.SQLAlchemyError:
+                db_session.rollback()
                 errors += ["Error saving project!"]
                 saved = False
 
