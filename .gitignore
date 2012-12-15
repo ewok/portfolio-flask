@@ -1,0 +1,4 @@
+/.idea
+/static/images/photos/*
+/static/images/clients/*
+!empty
