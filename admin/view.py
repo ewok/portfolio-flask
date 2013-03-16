@@ -1,6 +1,6 @@
 from flask import session, redirect, url_for, render_template, request
-from markupsafe._speedups import escape
-from sqlalchemy import exceptions
+from markupsafe import escape
+from sqlalchemy import exc
 
 from models import Category, Project, Info, Skill, Client
 from config import SITE_URL, STATIC_URL
@@ -56,7 +56,7 @@ def edit_project(project_id):
                 db_session.commit()
                 saved = True
 
-            except exceptions.SQLAlchemyError:
+            except exc.SQLAlchemyError:
                 db_session.rollback()
                 errors += ["Error saving project!"]
                 saved = False
@@ -106,7 +106,7 @@ def new_project():
             try:
                 db_session.add(project)
                 db_session.commit()
-            except exceptions.SQLAlchemyError:
+            except exc.SQLAlchemyError:
                 db_session.rollback()
                 errors += ['Error creating project #{0}\n'.format(project.id)]
 
@@ -161,7 +161,7 @@ def edit_about():
             db_session.add(about)
             db_session.commit()
             saved = True
-        except exceptions.SQLAlchemyError:
+        except exc.SQLAlchemyError:
             db_session.rollback()
             saved = False
 
@@ -232,7 +232,7 @@ def edit_client(client_id):
                 db_session.add(client)
                 db_session.commit()
                 saved = True
-            except exceptions.SQLAlchemyError:
+            except exc.SQLAlchemyError:
                 db_session.rollback()
                 saved = False
                 errors += ['Error saving client #{0}\n'.format(client.id)]
@@ -276,7 +276,7 @@ def new_client():
             try:
                 db_session.add(client)
                 db_session.commit()
-            except exceptions.SQLAlchemyError:
+            except exc.SQLAlchemyError:
                 db_session.rollback()
                 errors += ['Error creating client #{0}\n'.format(client.id)]
 
@@ -336,7 +336,7 @@ def categories_list():
             try:
                 db_session.add(category)
                 db_session.commit()
-            except exceptions.SQLAlchemyError:
+            except exc.SQLAlchemyError:
                 db_session.rollback()
                 errors += ['Error saving category #{0}\n'.format(category.id)]
                 saved = False
@@ -346,7 +346,7 @@ def categories_list():
             try:
                 db_session.add(category)
                 db_session.commit()
-            except exceptions.SQLAlchemyError:
+            except exc.SQLAlchemyError:
                 db_session.rollback()
                 errors += ['Error with new category']
                 saved = False
